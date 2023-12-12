@@ -1,0 +1,39 @@
+<div class="wrapper">
+    <div class="content-wrapper">
+        <div class="content">
+            <div class="chapter">
+                <p>Sign Up</p>
+            </div>
+            <div class="registration-form">
+                <form class="form" [formGroup]="registrationForm">
+                    <div class="control">
+                        <label class="label">FullName</label>
+                        <input formControlName="fullName" type="text">
+                    </div>
+                    <div class="control">
+                        <label class="label">Email</label>
+                        <input formControlName="email" type="text">
+                    </div>
+                    <div class="control">
+                        <label class="label">Password</label>
+                        <input formControlName="password" type="text">
+                    </div>
+                    <div class="control">
+                        <label class="label">Confirm Password</label>
+                        <input formControlName="confirmPassword" type="text">
+                    </div>
+                    <div class="error-message" *ngIf="registrationForm.errors as errors">
+                        <p *ngIf="errors.message">{{errors.message}}</p>
+                    </div>
+                    <div class="confirm-button">
+                        <button type="submit" (click)="registration()">Sing Up</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="navigate-to-login">
+        <p>Already have an account ?</p>
+        <span (click)="navigateToLogin()">Login here</span>
+    </div>
+</div>

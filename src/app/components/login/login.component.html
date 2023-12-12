@@ -1,0 +1,22 @@
+<div class="wrapper">
+    <div class="content">
+        <div class="chapter">
+            <p>Sign Up</p>
+        </div>
+        <div class="login-form">
+            <form class="form" [formGroup]="loginForm">
+                <div class="control">
+                    <label class="label">Email</label>
+                    <input formControlName="email" type="text">
+                </div>
+                <div class="control">
+                    <label class="label">Password</label>
+                    <input formControlName="password" type="text">
+                </div>
+                <div class="confirm-button">
+                    <button type="submit" (click)="login()">Sing In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
