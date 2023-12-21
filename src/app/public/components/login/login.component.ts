@@ -1,8 +1,9 @@
 import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { ILoginUser } from 'src/app/infrastructure';
-import { AuthService } from 'src/app/services';
+import { ILoginUser } from '../../infrastructure';
+import { AuthService } from '../../services';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,7 @@ export class LoginComponent {
   private builder = inject(FormBuilder);
   private auth = inject(AuthService);
   private destroy$ = new Subject();
+  private router = inject(Router);
 
   constructor() { }
 
@@ -34,8 +36,8 @@ export class LoginComponent {
     this.auth.login(this.loginForm.value).pipe(
       takeUntil(this.destroy$),
     ).subscribe(resp => {
-      debugger;
       this.loginedUser = resp;
+      this.router.navigate(['article']);
     })
   }
 }
