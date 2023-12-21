@@ -16,10 +16,9 @@ export class LoginComponent {
   private builder = inject(FormBuilder);
   private auth = inject(AuthService);
   private destroy$ = new Subject();
+  private router = inject(Router);
 
-  constructor(
-    private router: Router,
-  ) { }
+  constructor() { }
 
   ngOnInit() {
     this.loginForm = this.builder.group({

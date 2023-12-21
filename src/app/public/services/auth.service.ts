@@ -3,7 +3,6 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ILoginUser, IRegUser } from '../infrastructure';
-import { JwtHelperService } from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,14 @@ export class AuthService {
 
   constructor(
     private http: HttpClient,
-    private jwtHelper: JwtHelperService,
   ) { }
 
   public static getToken(): string | null {
     return localStorage.getItem('authToken');
   }
 
-  public isSingedIn(): boolean {
-    return AuthService.getToken() && !this.jwtHelper.isTokenExpired(AuthService.getToken());
+  public get isSingedIn(): boolean {
+    return !!AuthService.getToken();
   }
 
   public registration(userData: IRegUser): Observable<Partial<IRegUser>> {

@@ -20,6 +20,6 @@ import { ButtonModule } from "primeng/button";
     PublicRoutingModule,
     ReactiveFormsModule,
     ButtonModule,
-  ]
+  ],
 })
 export class PublicModule { }
