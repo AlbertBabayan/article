@@ -9,7 +9,7 @@ import { IArticle } from '../interfaces/article.interface';
 
 export class ArticlesService {
 
-  public serverUrl = environment.serverUrl;
+  private serverUrl = environment.serverUrl;
   private http = inject(HttpClient);
 
   constructor() {}
