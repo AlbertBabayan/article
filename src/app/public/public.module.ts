@@ -6,6 +6,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { LoginComponent } from './components/login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ButtonModule } from "primeng/button";
+import { AuthService } from './services';
 
 
 
@@ -20,6 +21,9 @@ import { ButtonModule } from "primeng/button";
     PublicRoutingModule,
     ReactiveFormsModule,
     ButtonModule,
+  ],
+  providers: [
+    AuthService,
   ],
 })
 export class PublicModule { }

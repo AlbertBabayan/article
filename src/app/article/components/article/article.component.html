@@ -1,1 +1,33 @@
-<p>article works!</p>
+<div class="wrapper">
+    <div class="content">
+        <div class="article" *ngFor="let article of articles">
+            <div class="element">
+                <!-- <img [src]="article.picture"> -->
+                <div class="title">
+                    {{article.title}}
+                </div>
+                <div class="body">
+                    {{article.body}}
+                </div>
+            </div>
+            <div class="action-area">
+                <button class="action" type="button" (click)="openArticle(article)">View</button>
+                <button class="action" type="button" (click)="create()">Create</button>
+                <button class="action" type="button" (click)="edit(article.id)">Edit</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<app-shared-modal #modal>
+    <ng-template #content>
+        <div class="inner">
+            <div class="title">
+                {{article?.title}}
+            </div>
+            <div class="body">
+                {{article?.body}}
+            </div>
+        </div>
+    </ng-template>
+</app-shared-modal>

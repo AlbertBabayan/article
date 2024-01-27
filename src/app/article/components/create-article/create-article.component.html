@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="wrapper">
+        <form [formGroup]="createArticleForm" class="article-form">
+            <div class="article-form-container">
+                <div class="inner-article-form-container">
+                    <div class="item">
+                        <label>Title</label>
+                        <input class="article-form-control" formControlName="title" type="text">
+                    </div>
+                    <div class="item">
+                        <label>Body</label>
+                        <input class="article-form-control" formControlName="body" type="text">
+                    </div>
+                    <div class="item">
+                        <label>Picture</label>
+                        <div class="file-upload">
+                            <input #uploadFile class="upload-input" type="file" (change)="onFileSelect($event)">
+                            <button class="file-upload-action" (click)="uploadFile.click()">Upload image</button>
+                            <div class="uploaded-file">
+                                <img class="uploaded-file-view" *ngIf="previewImage" [src]="previewImage" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="action">
+                        <button class="create" [disabled]="createArticleForm.invalid || !previewImage"
+                            (click)="createArticle()">Create</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

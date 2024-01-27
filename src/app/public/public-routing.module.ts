@@ -4,7 +4,6 @@ import { HomePageComponent } from './components/home-page/home-page.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { LoginComponent } from './components/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthService } from './services';
 
 const routes: Routes = [
   {
@@ -27,8 +26,5 @@ const routes: Routes = [
   exports: [
     RouterModule,
   ],
-  providers:[
-    AuthService,
-  ]
 })
 export class PublicRoutingModule { }

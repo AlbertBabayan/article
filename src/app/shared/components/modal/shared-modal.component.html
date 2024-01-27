@@ -1,0 +1,11 @@
+<div #myModal class="container">
+    <div class="content">
+        <div class="element">
+            <ng-container [ngTemplateOutlet]="content">
+            </ng-container>
+        </div>
+        <div class="action">
+            <button class="close" (click)="close()">Close</button>
+        </div>
+    </div>
+</div>

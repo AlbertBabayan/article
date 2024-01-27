@@ -2,9 +2,8 @@ import { Injectable } from '@angular/core';
 import { CanActivate } from '@angular/router';
 import { AuthService } from 'src/app/public/services';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
+
 export class ActivateArticleGuard implements CanActivate {
 
   constructor(
@@ -12,7 +11,7 @@ export class ActivateArticleGuard implements CanActivate {
   ) { }
 
   canActivate(): boolean {
-    return this.authSvc.isSingedIn ? true : false;
+    return this.authSvc.isSingedIn;
   }
 
 }
