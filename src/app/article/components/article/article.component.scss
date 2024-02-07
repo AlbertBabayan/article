@@ -3,8 +3,11 @@
         display: flex;
         flex-wrap: wrap;
         .article {
-            width: 150px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             margin: 10px;
+            width: 150px;
             .element {
                 display: flex;
                 flex-wrap: wrap;
@@ -19,22 +22,40 @@
             }
             .action-area {
                 display: flex;
-                justify-content: space-between;
+                justify-content: flex-start;
                 margin: 10px 0;
-                .action{
-                    background-color: white;
-                    width: auto;
-                    height: 25px;
-                    border: 1px solid #cecece;
-                    border-radius: 6px;
-                    font-size: 14px;
-                    color: green;
+                .action-wrraper {
+                    flex: 1;
+                    .action {
+                        background-color: white;
+                        width: auto;
+                        height: 25px;
+                        border: 1px solid #cecece;
+                        border-radius: 6px;
+                        font-size: 14px;
+                        color: green;
+                    }
                 }
-                .action:hover{
+                .action:hover {
                     background-color: #e6ece6;
                     cursor: pointer;
                 }
             }
+        }
+    }
+    .create-wrraper{
+        .create {
+            background-color: white;
+            width: auto;
+            height: 25px;
+            border: 1px solid #cecece;
+            border-radius: 6px;
+            font-size: 14px;
+            color: green;
+        }
+        .create:hover {
+            background-color: #e6ece6;
+            cursor: pointer;
         }
     }
 }

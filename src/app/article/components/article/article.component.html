@@ -1,32 +1,37 @@
 <div class="wrapper">
     <div class="content">
-        <div class="article" *ngFor="let article of articles">
+        <div class="article" *ngFor="let article of currentArticlesList | slice: 0: 12 ">
             <div class="element">
-                <!-- <img [src]="article.picture"> -->
                 <div class="title">
-                    {{article.title}}
+                    {{article?.title | slice: 0: 20}}
                 </div>
                 <div class="body">
-                    {{article.body}}
+                    {{article?.body | slice: 0: 120}}
                 </div>
             </div>
             <div class="action-area">
-                <button class="action" type="button" (click)="openArticle(article)">View</button>
-                <button class="action" type="button" (click)="create()">Create</button>
-                <button class="action" type="button" (click)="edit(article.id)">Edit</button>
+                <span class="action-wrraper">
+                    <button class="action" type="button" (click)="openArticle(article)">View</button>
+                </span>
+                <span class="action-wrraper">
+                    <button class="action" type="button" (click)="edit(article.id)">Edit</button>
+                </span>
             </div>
         </div>
     </div>
+    <div class="create-wrraper">
+        <button class="create" type="button" (click)="create()">Create</button>
+    </div>
 </div>
 
-<app-shared-modal #modal>
+<app-shared-modal #SharedModalComponent>
     <ng-template #content>
         <div class="inner">
             <div class="title">
-                {{article?.title}}
+                {{currentArticle?.title}}
             </div>
             <div class="body">
-                {{article?.body}}
+                {{currentArticle?.body}}
             </div>
         </div>
     </ng-template>

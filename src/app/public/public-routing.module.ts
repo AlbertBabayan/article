@@ -6,15 +6,10 @@ import { LoginComponent } from './components/login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
-  {
-    path: '',
-    children: [
-      {path: '', redirectTo: 'home-page', pathMatch: 'full'},
-      {path: 'home-page', component: HomePageComponent},
-      {path: 'registration', component: RegistrationComponent},
-      {path: 'login', component: LoginComponent},
-    ]
-  }
+  { path: '', redirectTo: 'home-page', pathMatch: 'full' },
+  { path: 'home-page', component: HomePageComponent },
+  { path: 'registration', component: RegistrationComponent },
+  { path: 'login', component: LoginComponent },
 ];
 
 @NgModule({

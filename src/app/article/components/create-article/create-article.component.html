@@ -17,13 +17,16 @@
                             <input #uploadFile class="upload-input" type="file" (change)="onFileSelect($event)">
                             <button class="file-upload-action" (click)="uploadFile.click()">Upload image</button>
                             <div class="uploaded-file">
-                                <img class="uploaded-file-view" *ngIf="previewImage" [src]="previewImage" />
+                                <img class="uploaded-file-view" *ngIf="createArticleForm.get('picture').value"
+                                    [src]="createArticleForm.get('picture').value" />
                             </div>
                         </div>
                     </div>
                     <div class="action">
-                        <button class="create" [disabled]="createArticleForm.invalid || !previewImage"
-                            (click)="createArticle()">Create</button>
+                        <button class="create"
+                            (click)="createArticle()"
+                            [disabled]="createArticleForm.invalid">Create
+                        </button>
                     </div>
                 </div>
             </div>

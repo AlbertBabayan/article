@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subject, takeUntil } from 'rxjs';
 import { IArticle } from '../../interfaces/article.interface';
@@ -9,20 +9,20 @@ import { ArticlesService } from '../../services/articles.service';
   templateUrl: './create-article.component.html',
   styleUrls: ['./create-article.component.scss']
 })
-export class CreateArticleComponent implements OnInit{
+export class CreateArticleComponent implements OnInit, OnDestroy {
 
   public createArticleForm: FormGroup;
-  public previewImage: string;
-  public currentArticle: IArticle;
   private articleService = inject(ArticlesService);
   private formBuilder = inject(FormBuilder);
   private destroy$ = new Subject();
 
   ngOnInit() {
-    this.createArticleForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      body: ['', [Validators.required]],
-    });
+    this.formInit();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   public onFileSelect(event: any): void {
@@ -30,18 +30,23 @@ export class CreateArticleComponent implements OnInit{
     const reader = new FileReader();
     reader.onload = () => {
       const base64: string = reader.result as string;
-      this.previewImage = base64;
+      this.createArticleForm.patchValue({ picture: base64 });
+      this.createArticleForm.get('picture').updateValueAndValidity();
     };
     reader.readAsDataURL(file);
   }
 
-  createArticle() {
-    const createdArticle = {
-      ...this.createArticleForm.value,
-      picture: this.previewImage,
-    }
-    this.articleService.createArticle(createdArticle).pipe(
+  public createArticle() {
+    this.articleService.createArticle(this.createArticleForm.value).pipe(
       takeUntil(this.destroy$)
-    )
+    ).subscribe()
+  }
+
+  private formInit() {
+    this.createArticleForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      body: ['', [Validators.required]],
+      picture: ['', [Validators.required]],
+    });
   }
 }

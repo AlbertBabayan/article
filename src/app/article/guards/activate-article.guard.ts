@@ -1,17 +1,5 @@
-import { Injectable } from '@angular/core';
-import { CanActivate } from '@angular/router';
-import { AuthService } from 'src/app/public/services';
+import { inject } from "@angular/core";
+import { AuthService } from "src/app/services";
 
-@Injectable()
 
-export class ActivateArticleGuard implements CanActivate {
-
-  constructor(
-    private authSvc: AuthService,
-  ) { }
-
-  canActivate(): boolean {
-    return this.authSvc.isSingedIn;
-  }
-
-}
+export const activateArticle = (): boolean => inject(AuthService).isSingedIn;

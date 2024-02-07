@@ -6,12 +6,12 @@
                     <div class="item">
                         <label>Title</label>
                         <input class="article-form-control" formControlName="title" type="text"
-                            [placeholder]="article.title | limitTo: 35">
+                            [placeholder]="currentArticle?.title | slice: 0: 35">
                     </div>
                     <div class="item">
                         <label>Body</label>
                         <input class="article-form-control" formControlName="body" type="text"
-                            [placeholder]="article.body | limitTo: 35">
+                            [placeholder]="currentArticle?.body | slice: 0: 35">
                     </div>
                     <div class="item">
                         <label>Picture</label>
@@ -19,13 +19,16 @@
                             <input #uploadFile class="upload-input" type="file" (change)="onFileSelect($event)">
                             <button class="file-upload-action" (click)="uploadFile.click()">Upload image</button>
                             <div class="uploaded-file">
-                                <img class="uploaded-file-view" *ngIf="previewImage" [src]="previewImage" />
+                                <img class="uploaded-file-view" *ngIf="articleForm.get('picture').value"
+                                    [src]="articleForm.get('picture').value" />
                             </div>
                         </div>
                     </div>
                     <div class="action">
-                        <button class="update" [disabled]="articleForm.invalid || !previewImage"
-                            (click)="updateArticle()">Update</button>
+                        <button class="update"
+                            (click)="updateArticle()"
+                            [disabled]="articleForm.invalid">Update
+                        </button>
                     </div>
                 </div>
             </div>

@@ -7,6 +7,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { PublicModule } from './public/public.module';
 import { ArticleModule } from './article/article.module';
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import { ArticleResolver } from './resovers/article.resolver';
+import { AuthService } from './services';
 
 
 @NgModule({
@@ -21,6 +23,8 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     ArticleModule,
   ],
   providers: [
+    AuthService,
+    ArticleResolver,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

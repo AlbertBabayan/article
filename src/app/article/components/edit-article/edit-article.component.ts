@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
@@ -10,34 +10,26 @@ import { ArticlesService } from '../../services/articles.service';
   templateUrl: './edit-article.component.html',
   styleUrls: ['./edit-article.component.scss']
 })
-export class EditArticleComponent implements OnInit {
+export class EditArticleComponent implements OnInit, OnDestroy {
 
-  public article: IArticle;
+  public currentArticle: IArticle;
   public currentArticleId: number;
-  public previewImage: string;
   public articleForm: FormGroup;
   private formBuilder = inject(FormBuilder);
   private articlesSvc = inject(ArticlesService);
   private activeRoute = inject(ActivatedRoute);
   private destroy$ = new Subject();
-
+  
   constructor() { }
 
   ngOnInit() {
-    this.activeRoute.params.subscribe(params => {
-      this.currentArticleId = params.id;
-    })
-    this.articlesSvc.getArticle(this.currentArticleId).pipe(
-      takeUntil(this.destroy$)
-    ).subscribe(
-      resp => {
-        this.article = resp
-      }
-    )
-    this.articleForm = this.formBuilder.group({
-      title: ['', [Validators.required]],
-      body: ['', [Validators.required]],
-    })
+    this.getArticleInit();
+    this.formInit();
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next(true);
+    this.destroy$.complete();
   }
 
   public onFileSelect(event: any): void {
@@ -45,20 +37,32 @@ export class EditArticleComponent implements OnInit {
     const reader = new FileReader();
     reader.onload = () => {
       const base64: string = reader.result as string;
-      this.previewImage = base64;
+      this.articleForm.patchValue({ picture: base64 });
+      this.articleForm.get('picture').updateValueAndValidity();
     };
     reader.readAsDataURL(file);
   }
 
   public updateArticle() {
-    const updatedArticle = {
-      ...this.articleForm.value,
-      picture: this.previewImage,
-    }
-    this.articlesSvc.updateArticle(updatedArticle, this.article.id).pipe(
+    this.articlesSvc.updateArticle(this.articleForm.value, this.currentArticle.id).pipe(
       takeUntil(this.destroy$)
     ).subscribe(
-      resp => this.article = resp
+      resp => this.currentArticle = resp
     )
+  }
+
+  private formInit() {
+    this.articleForm = this.formBuilder.group({
+      title: ['', [Validators.required]],
+      body: ['', [Validators.required]],
+      picture: ['', [Validators.required]],
+    })
+  }
+
+  private getArticleInit() {
+    this.activeRoute.data.subscribe(
+      data => {
+        this.currentArticle = data.article;
+      });
   }
 }

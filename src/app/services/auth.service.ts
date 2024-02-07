@@ -1,16 +1,17 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ILoginUser, IRegUser } from '../infrastructure';
+import { ILoginUser, IRegUser } from '../public/infrastructure';
+
 
 @Injectable()
 
 export class AuthService {
 
-  constructor(
-    private http: HttpClient,
-  ) { }
+  private http = inject(HttpClient);
+
+  constructor() { }
 
   public static getToken(): string | null {
     return localStorage.getItem('authToken');
@@ -28,8 +29,7 @@ export class AuthService {
       password_confirmation: confirmPassword,
       ...rest
     }
-
-    const { prod, serverUrl } = environment;
+    const { serverUrl } = environment;
     return this.http.post<Partial<IRegUser>>(`${serverUrl}/api/register`, payload);
   }
 

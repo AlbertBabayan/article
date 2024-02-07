@@ -1,22 +1,29 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
-import { ActivateArticleGuard } from './guards/activate-article.guard';
+import { activateArticle } from './guards/activate-article.guard';
 import { ArticlesService } from './services/articles.service';
 import { SharedModule } from '../shared/shared.module';
 import { ArticleComponent } from './components/article/article.component';
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { CreateArticleComponent } from './components/create-article/create-article.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ArticleResolver } from '../resovers/article.resolver';
+import { activateEditArticle } from './guards/activate-edit-article.guard';
 
 
 const routes: Routes = [
   {
     path: 'article',
-    canActivate: [ActivateArticleGuard],
     component: ArticleComponent,
+    canActivate: [activateArticle],
   },
-  { path: 'edit-article/:id', component: EditArticleComponent },
+  {
+    path: 'edit-article/:id',
+    component: EditArticleComponent,
+    canActivate: [activateEditArticle()],
+    resolve: { article: ArticleResolver }
+  },
   { path: 'create-article', component: CreateArticleComponent },
 ];
 
@@ -33,8 +40,7 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
   providers: [
-    ActivateArticleGuard,
-    ArticlesService
+    ArticlesService,
   ],
 })
 export class ArticleModule { }

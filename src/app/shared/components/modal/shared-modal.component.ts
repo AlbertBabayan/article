@@ -7,7 +7,7 @@ import { Component, ContentChild, ElementRef, TemplateRef, ViewChild } from '@an
 })
 export class SharedModalComponent {
 
-  @ViewChild('myModal', {static: false}) modal: ElementRef;
+  @ViewChild('myModal') modal: ElementRef;
   @ContentChild('content') content: TemplateRef<any>;
 
   open() {
