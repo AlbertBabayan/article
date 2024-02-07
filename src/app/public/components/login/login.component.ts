@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/services';
 import { ILoginUser } from '../../infrastructure';
-import { AuthService } from '../../services';
+
 
 @Component({
   selector: 'app-login',

@@ -1,0 +1,89 @@
+.container {
+    .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .article-form {
+            width: 400px;
+            .article-form-container {
+                display: flex;
+                align-items: center;
+                height: 80vh;
+                .inner-article-form-container {
+                    width: 100%;
+                    .item {
+                        width: 100%;
+                        display: flex;
+                        color: gray;
+                        margin: 30px 0;
+                        :first-child {
+                            flex: 1;
+                        }
+                        :last-child {
+                            flex: 3;
+                        }
+                        .article-form-control {
+                            width: 200px;
+                            height: 35px;
+                            border-radius: 5px;
+                            border: 1px solid gray;
+                        }
+                        .article-form-control:focus {
+                            outline: none;
+                            border: 2px solid #6c93be;
+                        }
+                        .file-upload {
+                            .upload-input {
+                                display: none;
+                            }
+                            .file-upload-action {
+                                width: 100px;
+                                height: 25px;
+                                border-radius: 5px;
+                                border: 1px solid gray;
+                                color: #6c93be;
+                            }
+                            .file-upload-action:hover {
+                                color: black;
+                                background: #00f34114;
+                                cursor: pointer;
+                            }
+                            .uploaded-file {
+                                height: auto;
+                                width: 100%;
+                                padding-top: 10px;
+                                .uploaded-file-view {
+                                    width: inherit;
+                                    height: inherit;
+                                }
+                            }
+                        }
+                    }
+                    .action {
+                        display: flex;
+                        justify-content: flex-end;
+                        width: 100%;
+                        .create {
+                            width: 100px;
+                            height: 25px;
+                            border-radius: 5px;
+                            border: 1px solid gray;
+                            color: #6c93be;
+                        }
+                        .create:hover {
+                            color: black;
+                            background: #00f34114;
+                            cursor: pointer;
+                        }
+                        .create:disabled {
+                            background: #f0f0f0;
+                            cursor: not-allowed;
+                            color: #a4a4a4;
+                            border: none;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

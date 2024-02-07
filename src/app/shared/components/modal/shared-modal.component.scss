@@ -1,0 +1,47 @@
+.container {
+	display: none;
+	position: fixed;
+	z-index: 1;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.4);
+	.content {
+		background-color: #fefefe;
+		margin: 15% auto;
+		padding: 20px;
+		border: 1px solid #888;
+		width: 50%;
+		height: 50%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-wrap: wrap;
+		.element {
+			display: flex;
+			justify-content: center;
+			flex-wrap: wrap;
+			width: 65%;
+			height: 92%;
+		}
+		.action {
+			width: 100%;
+			height: 8%;
+			justify-content: flex-end;
+			display: flex;
+			.close {
+				width: 10%;
+				background: white;
+				color: red;
+				border: 1px solid red;
+				border-radius: 3px;
+				font-size: 15px;
+			}
+			.close:hover {
+				cursor: pointer;
+				background: #fff5f5;
+			}
+		}
+	}
+}
