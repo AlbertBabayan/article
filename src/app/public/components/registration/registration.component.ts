@@ -2,10 +2,8 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
+import { AuthService } from 'src/app/services';
 import { comparisonValidator } from '../../infrastructure';
-import { AuthService } from '../../services';
-
-
 
 @Component({
   selector: 'app-registration',
@@ -30,7 +28,6 @@ export class RegistrationComponent {
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     }, { validators: [comparisonValidator()] });
-    // this.registrationForm.setValidators(comparisonValidator())
   }
 
   ngOnDestroy(): void {

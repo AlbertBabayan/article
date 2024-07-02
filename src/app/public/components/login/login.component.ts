@@ -2,8 +2,9 @@ import { Component, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Subject, takeUntil } from 'rxjs';
-import { ILoginUser } from '../../infrastructure';
-import { AuthService } from '../../services';
+// import { AuthService } from 'src/app/services';
+// import { ILoginUser } from '../../infrastructure';
+
 
 @Component({
   selector: 'app-login',
@@ -12,9 +13,8 @@ import { AuthService } from '../../services';
 })
 export class LoginComponent {
   public loginForm: FormGroup;
-  public loginedUser: ILoginUser;
   private builder = inject(FormBuilder);
-  private auth = inject(AuthService);
+  // private auth = inject(AuthService);
   private destroy$ = new Subject();
   private router = inject(Router);
 
@@ -33,11 +33,11 @@ export class LoginComponent {
   }
 
   public login() {
-    this.auth.login(this.loginForm.value).pipe(
-      takeUntil(this.destroy$),
-    ).subscribe(resp => {
-      this.loginedUser = resp;
-      this.router.navigate(['article']);
-    })
+    this.router.navigate(['article']);
+    // this.auth.login(this.loginForm.value).pipe // to do error handling
+    //   takeUntil(this.destroy$),
+    // ).subscribe(() => {
+    //   this.router.navigate(['article']);
+    // })
   }
 }
