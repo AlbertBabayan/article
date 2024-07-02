@@ -14,7 +14,7 @@ import { Subject, takeUntil } from 'rxjs';
 export class LoginComponent {
   public loginForm: FormGroup;
   private builder = inject(FormBuilder);
-  // private auth = inject(AuthService);
+  // private authService = inject(AuthService);
   private destroy$ = new Subject();
   private router = inject(Router);
 
@@ -34,7 +34,7 @@ export class LoginComponent {
 
   public login() {
     this.router.navigate(['article']);
-    // this.auth.login(this.loginForm.value).pipe // to do error handling
+    // this.authService.login(this.loginForm.value).pipe // to do error handling
     //   takeUntil(this.destroy$),
     // ).subscribe(() => {
     //   this.router.navigate(['article']);
