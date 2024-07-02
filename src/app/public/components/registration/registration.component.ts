@@ -5,9 +5,6 @@ import { Subject, takeUntil } from 'rxjs';
 import { AuthService } from 'src/app/services';
 import { comparisonValidator } from '../../infrastructure';
 
-
-
-
 @Component({
   selector: 'app-registration',
   templateUrl: './registration.component.html',
